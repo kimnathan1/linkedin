@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chulsoo Kim | LinkedNi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+            background-color: #f3f2ef;
+        }
+        .nav-item.active {
+            color: black;
+            border-bottom: 2px solid black;
+        }
+        .nav-item.active svg {
+            stroke-width: 2.5;
+        }
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    </style>
+</head>
+<body class="text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50 h-[52px] flex items-center justify-center px-4">
+        <div class="max-w-6xl w-full flex items-center justify-between">
+            <!-- Logo & Search -->
+            <div class="flex items-center gap-2 md:gap-4">
+                <div class="text-[#0a66c2] bg-white rounded-md shrink-0">
+                    <!-- Custom LinkedNi Logo -->
+                    <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor">
+                         <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2z M8 19V10h3v1.2c.42-.65 1.17-1.59 2.91-1.59 2.12 0 3.17 1.4 3.17 4.4v5h-3v-4.74c0-1.21-.43-2-1.52-2A1.65 1.65 0 0010.08 14v5H8z M19 19h-3v-9h3z M17.5 8.25A1.75 1.75 0 1119.3 6.5a1.78 1.78 0 01-1.8 1.75z"></path>
+                    </svg>
+                </div>
+                <div class="hidden md:flex items-center bg-[#edf3f8] px-3 py-1.5 rounded-md w-64 transition-all focus-within:w-80 focus-within:border focus-within:border-black">
+                    <i data-lucide="search" class="text-gray-500 mr-2 w-4 h-4"></i>
+                    <input type="text" placeholder="Search" class="bg-transparent border-none outline-none text-sm w-full placeholder-gray-500">
+                </div>
+                <div class="md:hidden text-gray-600">
+                    <i data-lucide="search" class="w-6 h-6"></i>
+                </div>
+            </div>
+
+            <!-- Nav Items -->
+            <ul class="flex items-center gap-1 sm:gap-6 fixed bottom-0 left-0 w-full bg-white border-t md:border-t-0 md:static md:w-auto md:bg-transparent justify-around md:justify-end pb-1 md:pb-0 h-16 md:h-auto z-50">
+                <li class="nav-item flex flex-col items-center cursor-pointer min-w-[60px] md:min-w-auto text-gray-500 hover:text-black" onclick="setActiveTab(this)">
+                    <i data-lucide="home" class="w-6 h-6"></i>
+                    <span class="text-[10px] md:text-xs mt-0.5 hidden sm:block">Home</span>
+                </li>
+                <li class="nav-item flex flex-col items-center cursor-pointer min-w-[60px] md:min-w-auto text-gray-500 hover:text-black" onclick="setActiveTab(this)">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                    <span class="text-[10px] md:text-xs mt-0.5 hidden sm:block">My Network</span>
+                </li>
+                <li class="nav-item flex flex-col items-center cursor-pointer min-w-[60px] md:min-w-auto text-gray-500 hover:text-black" onclick="setActiveTab(this)">
+                    <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    <span class="text-[10px] md:text-xs mt-0.5 hidden sm:block">Jobs</span>
+                </li>
+                <li class="nav-item flex flex-col items-center cursor-pointer min-w-[60px] md:min-w-auto text-gray-500 hover:text-black" onclick="setActiveTab(this)">
+                    <i data-lucide="message-square" class="w-6 h-6"></i>
+                    <span class="text-[10px] md:text-xs mt-0.5 hidden sm:block">Messaging</span>
+                </li>
+                <li class="nav-item flex flex-col items-center cursor-pointer min-w-[60px] md:min-w-auto text-gray-500 hover:text-black" onclick="setActiveTab(this)">
+                    <i data-lucide="bell" class="w-6 h-6"></i>
+                    <span class="text-[10px] md:text-xs mt-0.5 hidden sm:block">Notifications</span>
+                </li>
+                <li class="nav-item active flex flex-col items-center cursor-pointer min-w-[60px] md:min-w-auto text-gray-500 hover:text-black" onclick="setActiveTab(this)">
+                    <div class="w-6 h-6 rounded-full overflow-hidden mb-0.5">
+                        <img src="https://drive.google.com/uc?export=view&id=1laEZFnykoXsq2Z6EJFeRo8S5nDPdJ-UX" alt="Me" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-[10px] md:text-xs hidden sm:block">Me</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-[70px] pb-20 md:pb-10 max-w-[1128px] mx-auto px-0 sm:px-4 grid grid-cols-1 md:grid-cols-12 gap-6">
+        
+        <!-- Left/Main Column -->
+        <div class="md:col-span-8 lg:col-span-9 space-y-2">
+            
+            <!-- Profile Header -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-4 relative">
+                <!-- Banner -->
+                <div class="h-32 sm:h-48 w-full relative bg-gray-300">
+                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Banner" class="w-full h-full object-cover">
+                </div>
+
+                <div class="px-6 pb-6 pt-0 relative">
+                    <!-- Avatar -->
+                    <div class="absolute -top-16 left-6 border-4 border-white rounded-full w-32 h-32 sm:w-40 sm:h-40 bg-white overflow-hidden shadow-sm">
+                        <img src="https://drive.google.com/uc?export=view&id=1laEZFnykoXsq2Z6EJFeRo8S5nDPdJ-UX" alt="Profile" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Edit/Share Actions -->
+                    <div class="flex justify-end pt-4 gap-2">
+                         <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors">
+                             <i data-lucide="share-2" class="w-5 h-5"></i>
+                         </button>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="mt-4 sm:mt-12">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-1">
+                                    Chulsoo Kim
+                                    <span class="text-gray-500 text-sm font-normal">(He/Him)</span>
+                                </h1>
+                                <p class="text-gray-900 mt-1 text-base sm:text-lg">International Relations Graduate & AI Service Planner | TEDxSeoul Speaker | Tech-Driven Social Impact Innovator</p>
+                                
+                                <div class="flex flex-wrap items-center gap-x-2 text-sm text-gray-500 mt-2">
+                                    <span>Seoul, South Korea</span>
+                                    <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                                    <span class="text-[#0a66c2] font-bold hover:underline cursor-pointer">Contact info</span>
+                                </div>
+
+                                <div class="mt-2 text-[#0a66c2] font-bold text-sm hover:underline cursor-pointer">
+                                    500+ connections
+                                </div>
+                            </div>
+                            
+                            <!-- Right side logos removed as requested -->
+                            <div class="hidden md:block"></div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <button id="connectBtn" onclick="toggleConnect()" class="px-4 py-1.5 rounded-full font-semibold transition-colors flex items-center gap-1 bg-[#0a66c2] text-white hover:bg-[#004182]">
+                                <i data-lucide="plus" class="w-4 h-4"></i> Connect
+                            </button>
+                            <button class="px-4 py-1.5 rounded-full font-semibold border border-[#0a66c2] text-[#0a66c2] hover:bg-blue-50 flex items-center gap-1 transition-colors">
+                                <i data-lucide="message-circle" class="w-4 h-4"></i> Message
+                            </button>
+                            <button id="followBtn" onclick="toggleFollow()" class="px-4 py-1.5 rounded-full font-semibold border border-gray-500 text-gray-600 hover:bg-gray-100 transition-colors">
+                                More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-900">About</h2>
+                </div>
+                <p class="text-sm text-gray-900 whitespace-pre-line leading-relaxed">With a diverse academic background in International Relations (IBEI) and current studies in Social Work at Griffith University, I am passionate about solving social problems through innovative approaches.
+
+Uniquely, I possess strong technical proficiency in AI and digital solutions, demonstrated by multiple awards in AI contents and social innovation competitions. My goal is to leverage technology to enhance social welfare systems and create sustainable community impact.</p>
+            </div>
+
+            <!-- Experience Section -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-900">Experience</h2>
+                    <i data-lucide="plus" class="text-gray-500 cursor-pointer hover:text-black w-5 h-5"></i>
+                </div>
+                <ul class="space-y-6">
+                    <!-- Exp 1 -->
+                    <li class="flex gap-3 sm:gap-4">
+                        <img src="https://placehold.co/48x48/f59e0b/white?text=TA" alt="Travel Agency" class="w-12 h-12 rounded-sm object-cover bg-gray-100">
+                        <div class="flex-1 border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-base text-gray-900">Inbound Coordinator</h3>
+                            <p class="text-sm text-gray-900">Travel Agency · Full-time</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Jan 2024 – Present · Melbourne, Australia</p>
+                            <div class="mt-2 text-sm text-gray-800">
+                                Coordinated inbound travel operations, managing logistics and itineraries for international visitors. Facilitated cross-cultural communication and resolved on-ground issues to ensure high-quality client experiences.
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Exp 2 -->
+                    <li class="flex gap-3 sm:gap-4">
+                        <img src="https://placehold.co/48x48/10b981/white?text=IP" alt="Independent Projects" class="w-12 h-12 rounded-sm object-cover bg-gray-100">
+                        <div class="flex-1 border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-base text-gray-900">Local Entrepreneur & Project Lead</h3>
+                            <p class="text-sm text-gray-900">Independent Projects (Local Revitalization)</p>
+                            <p class="text-sm text-gray-500 mt-0.5">2023 · Uiseong, South Korea</p>
+                            <div class="mt-2 text-sm text-gray-800">
+                                Planned and executed local revitalization projects aimed at boosting the regional economy in rural Korea. Collaborated with local stakeholders to develop sustainable business models and community-driven initiatives.
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Exp 3 -->
+                    <li class="flex gap-3 sm:gap-4">
+                        <img src="https://placehold.co/48x48/3b82f6/white?text=CG" alt="Consulate General" class="w-12 h-12 rounded-sm object-cover bg-gray-100">
+                        <div class="flex-1 border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-base text-gray-900">Administrative Staff</h3>
+                            <p class="text-sm text-gray-900">Consulate General of the Republic of Korea in Mumbai</p>
+                            <p class="text-sm text-gray-500 mt-0.5">2022 · Mumbai, India</p>
+                            <div class="mt-2 text-sm text-gray-800">
+                                Assisted in diplomatic administrative duties and supported consular services. Facilitated communication between the consulate and local organizations, contributing to public diplomacy efforts.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Education Section -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-900">Education</h2>
+                    <i data-lucide="plus" class="text-gray-500 cursor-pointer hover:text-black w-5 h-5"></i>
+                </div>
+                <ul class="space-y-6">
+                    <!-- Edu 1 -->
+                    <li class="flex gap-3 sm:gap-4">
+                        <img src="https://placehold.co/48x48/be123c/white?text=GU" alt="Griffith University" class="w-12 h-12 rounded-sm object-cover bg-gray-100">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-base text-gray-900">Griffith University</h3>
+                            <p class="text-sm text-gray-900">Social Work</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Currently Enrolled · Australia</p>
+                        </div>
+                    </li>
+                    <!-- Edu 2 -->
+                    <li class="flex gap-3 sm:gap-4">
+                        <img src="https://placehold.co/48x48/1d4ed8/white?text=IBEI" alt="IBEI" class="w-12 h-12 rounded-sm object-cover bg-gray-100">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-base text-gray-900">Institut Barcelona d'Estudis Internacionals (IBEI)</h3>
+                            <p class="text-sm text-gray-900">International Relations</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Spain</p>
+                        </div>
+                    </li>
+                     <!-- Edu 3 -->
+                     <li class="flex gap-3 sm:gap-4">
+                        <img src="https://placehold.co/48x48/ea580c/white?text=HA" alt="Hancom Academy" class="w-12 h-12 rounded-sm object-cover bg-gray-100">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-base text-gray-900">Hancom Academy</h3>
+                            <p class="text-sm text-gray-900">ICT & AI Technology Education</p>
+                            <p class="text-sm text-gray-500 mt-0.5">South Korea</p>
+                            <p class="text-sm text-gray-800 mt-2">Received CEO Recommendation Award for outstanding performance.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Awards Section -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-900">Honors & Awards</h2>
+                    <i data-lucide="plus" class="text-gray-500 cursor-pointer hover:text-black w-5 h-5"></i>
+                </div>
+                <ul class="space-y-6">
+                    <!-- Award 1 -->
+                    <li class="flex gap-3 sm:gap-4">
+                        <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-sm shrink-0">
+                            <i data-lucide="award" class="text-gray-600 w-6 h-6"></i>
+                        </div>
+                        <div class="flex-1 border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-base text-gray-900">Gyeonggi Governor’s Award (Grand Prize)</h3>
+                            <p class="text-sm text-gray-900">Gyeonggi Provincial Government</p>
+                            <p class="text-sm text-gray-500 mt-0.5">2023</p>
+                            <div class="mt-2 text-sm text-gray-800">Project: Spent Grain Upcycling Project. Recognized for creating an eco-friendly circular economy model. Featured in the 2023 Gyeonggi-do Policy Best Practice Booklet.</div>
+                        </div>
+                    </li>
+                     <!-- Award 2 -->
+                     <li class="flex gap-3 sm:gap-4">
+                        <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-sm shrink-0">
+                            <i data-lucide="award" class="text-gray-600 w-6 h-6"></i>
+                        </div>
+                        <div class="flex-1 border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-base text-gray-900">AI Special Award</h3>
+                            <p class="text-sm text-gray-900">Gyeongbuk International AI Metaverse Film Festival (GAMFF)</p>
+                            <div class="mt-2 text-sm text-gray-800">Recognized for creative storytelling and technical application using generative AI tools in film production.</div>
+                        </div>
+                    </li>
+                     <!-- Award 3 -->
+                     <li class="flex gap-3 sm:gap-4">
+                        <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-sm shrink-0">
+                            <i data-lucide="award" class="text-gray-600 w-6 h-6"></i>
+                        </div>
+                        <div class="flex-1 border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-base text-gray-900">2nd Place, Regional Activation Contest using AI</h3>
+                            <p class="text-sm text-gray-900">Sejong Cyber University</p>
+                            <div class="mt-2 text-sm text-gray-800">Awarded for proposing innovative solutions to revitalize local communities by leveraging Artificial Intelligence technologies.</div>
+                        </div>
+                    </li>
+                     <!-- Award 4 -->
+                     <li class="flex gap-3 sm:gap-4">
+                        <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-sm shrink-0">
+                            <i data-lucide="award" class="text-gray-600 w-6 h-6"></i>
+                        </div>
+                        <div class="flex-1 border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-base text-gray-900">Award Winner, 2020 Social Contribution PLUS+ Contest</h3>
+                            <p class="text-sm text-gray-900">Seoul National University (Global Social Contribution Corps)</p>
+                             <p class="text-sm text-gray-500 mt-0.5">2020</p>
+                            <div class="mt-2 text-sm text-gray-800">Project: Proposed a Proposal Writing Chatbot using GPT-2.0. Developed an AI-based solution to assist NGOs and social workers in drafting efficient project proposals.</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-900">Skills</h2>
+                    <div class="flex gap-3 text-gray-500">
+                        <i data-lucide="plus" class="cursor-pointer hover:text-black w-5 h-5"></i>
+                        <i data-lucide="more-horizontal" class="cursor-pointer hover:text-black w-5 h-5"></i>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 cursor-pointer transition-colors flex items-center gap-1">
+                        AI Service Planning
+                        <span class="text-gray-400">· 12</span>
+                    </span>
+                    <span class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 cursor-pointer transition-colors flex items-center gap-1">
+                        Social Innovation
+                        <span class="text-gray-400">· 8</span>
+                    </span>
+                    <span class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 cursor-pointer transition-colors flex items-center gap-1">
+                        International Relations
+                        <span class="text-gray-400">· 10</span>
+                    </span>
+                    <span class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 cursor-pointer transition-colors flex items-center gap-1">
+                        Public Diplomacy
+                    </span>
+                    <span class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 cursor-pointer transition-colors flex items-center gap-1">
+                        React.js
+                    </span>
+                    <span class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 cursor-pointer transition-colors flex items-center gap-1">
+                        Generative AI Tools
+                    </span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-gray-100 text-center">
+                    <button class="text-gray-500 font-semibold hover:bg-gray-100 px-4 py-1 rounded w-full text-sm transition-colors">Show all skills</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Sidebar (Hidden on mobile) -->
+        <div class="hidden md:block md:col-span-4 lg:col-span-3 space-y-4">
+            
+            <!-- Language Profile -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col gap-3">
+                <div class="flex justify-between items-center text-sm font-semibold text-gray-500 hover:text-blue-600 cursor-pointer">
+                    <span>Profile language</span>
+                    <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                </div>
+                <div class="border-t border-gray-200 pt-3 flex justify-between items-center text-sm font-semibold text-gray-500 hover:text-blue-600 cursor-pointer">
+                    <span>Public profile & URL</span>
+                    <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                </div>
+            </div>
+
+            <!-- People also viewed -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <h3 class="text-gray-900 font-semibold mb-4 text-sm">People also viewed</h3>
+                <ul class="space-y-4">
+                    <li class="flex gap-3 items-start">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jessica" alt="Person" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900 hover:underline cursor-pointer">Younghee Lee</div>
+                            <div class="text-xs text-gray-500 line-clamp-2">HR Manager at Tech Corp</div>
+                            <button class="mt-2 flex items-center justify-center gap-1 w-24 py-1 rounded-full border border-gray-500 text-gray-600 text-sm font-semibold hover:bg-gray-100 hover:border-gray-900 transition-colors">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Connect
+                            </button>
+                        </div>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="Person" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900 hover:underline cursor-pointer">Jisung Park</div>
+                            <div class="text-xs text-gray-500 line-clamp-2">Senior Backend Developer</div>
+                            <button class="mt-2 flex items-center justify-center gap-1 w-24 py-1 rounded-full border border-gray-500 text-gray-600 text-sm font-semibold hover:bg-gray-100 hover:border-gray-900 transition-colors">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Connect
+                            </button>
+                        </div>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Robert" alt="Person" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900 hover:underline cursor-pointer">Minsu Choi</div>
+                            <div class="text-xs text-gray-500 line-clamp-2">Product Designer</div>
+                            <button class="mt-2 flex items-center justify-center gap-1 w-24 py-1 rounded-full border border-gray-500 text-gray-600 text-sm font-semibold hover:bg-gray-100 hover:border-gray-900 transition-colors">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Connect
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+                <button class="w-full mt-4 py-1 text-sm text-gray-500 font-semibold hover:bg-gray-100 rounded transition-colors">
+                    Show all
+                </button>
+            </div>
+
+            <!-- Ad Mockup -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
+                <div class="text-xs text-right text-gray-500 mb-2">Ad</div>
+                <div class="text-xs text-gray-500 mb-2">Chulsoo Kim, see the skills that employers want.</div>
+                <div class="flex justify-center gap-4 mb-4">
+                    <img src="https://drive.google.com/uc?export=view&id=1laEZFnykoXsq2Z6EJFeRo8S5nDPdJ-UX" class="w-16 h-16 rounded-full object-cover" alt="Me">
+                    <div class="w-16 h-16 bg-yellow-100 rounded flex items-center justify-center text-yellow-600">
+                        <i data-lucide="award" class="w-8 h-8"></i>
+                    </div>
+                </div>
+                <button class="border border-[#0a66c2] text-[#0a66c2] font-semibold px-4 py-1 rounded-full text-sm hover:bg-blue-50 transition-colors">
+                    See who's viewing your profile
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-xs text-gray-500 p-4 text-center sm:text-left">
+                <div class="flex flex-wrap gap-x-4 gap-y-2 justify-center sm:justify-start">
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">Accessibility</span>
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">Help Center</span>
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">Privacy & Terms</span>
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">Ad Choices</span>
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">Advertising</span>
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">Business Services</span>
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">Get the LinkedIn app</span>
+                    <span class="hover:text-[#0a66c2] hover:underline cursor-pointer">More</span>
+                </div>
+                <div class="mt-2 text-center sm:text-left">
+                    LinkedNi Corporation © 2024
+                </div>
+            </footer>
+        </div>
+
+        <!-- Mobile Footer -->
+        <div class="md:hidden p-4 text-center text-xs text-gray-500">
+            LinkedNi Corporation © 2024
+        </div>
+    </main>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Interaction Logic
+        let isConnected = false;
+        let isFollowing = false;
+
+        function toggleConnect() {
+            isConnected = !isConnected;
+            const btn = document.getElementById('connectBtn');
+            if (isConnected) {
+                btn.className = "px-4 py-1.5 rounded-full font-semibold transition-colors flex items-center gap-1 bg-white border border-gray-400 text-gray-600 hover:bg-gray-100";
+                btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Pending';
+            } else {
+                btn.className = "px-4 py-1.5 rounded-full font-semibold transition-colors flex items-center gap-1 bg-[#0a66c2] text-white hover:bg-[#004182]";
+                btn.innerHTML = '<i data-lucide="plus" class="w-4 h-4"></i> Connect';
+            }
+            lucide.createIcons();
+        }
+
+        function toggleFollow() {
+            isFollowing = !isFollowing;
+            const btn = document.getElementById('followBtn');
+            if (isFollowing) {
+                btn.textContent = 'Following';
+                btn.classList.add('bg-gray-100');
+            } else {
+                btn.textContent = 'More';
+                btn.classList.remove('bg-gray-100');
+            }
+        }
+
+        function setActiveTab(el) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
+</body>
+</html>
